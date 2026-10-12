@@ -21,7 +21,7 @@ feature_row:
   - image_path: /images/monte-carlo.png
     alt: "Monte Carlo option pricing visualization"
     title: "Monte Carlo Option Pricing"
-    excerpt: "Monte Carlo simulation of European and Asian options under Black–Scholes, with variance reduction via a geometric Asian control variate and calibration against real SPY market data."
+    excerpt: "Numerical simulation and convergence analysis of European and Asian option pricing under the Black–Scholes model, with validation against analytical solutions and empirical calibration using SPY market data."
     url: "/portfolio/monte-carlo-nm/"
     btn_label: "Read More"
     btn_class: "btn--primary"
