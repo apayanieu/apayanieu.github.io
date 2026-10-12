@@ -41,9 +41,13 @@ Each node has a stubbornness \( S_i \in [1, 100] \). At \( S_i = 1 \), an agent 
 
 When neighbour \( j \) tries to persuade \( i \), the attempt succeeds with probability
 
-\[
-p_{ij} = \frac{w_{ij}}{S_i},
-\]
+Test inline: $p_{ij} = \frac{w_{ij}}{S_i}$
+
+Test display:
+
+$$
+p_{\text{flip}}(i) = 1 - \prod_{j} \left(1 - \frac{w_{ij}}{S_i}\right)
+$$
 
 where \( w_{ij} \in [0,1] \) is the current trust weight of the edge. With multiple disagreeing neighbours, the probability that \( i \) flips is
 
