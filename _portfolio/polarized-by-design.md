@@ -1,3 +1,4 @@
+use_math: true
 ---
 title: "Polarized by Design: A Phase Diagram of Opinion Polarization on Adaptive Hebbian Networks"
 excerpt: "Charting when and how sharply a society splits into two echo chambers when only the strength of social ties — not the topology — is allowed to adapt."
