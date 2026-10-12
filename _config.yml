@@ -19,7 +19,7 @@ repository               : "apayanieu/apayanieu.github.io"
 # Site Author
 author:
   name             : "Alfonso Payan Callejas"
-  avatar           : # Path to an image, e.g., "assets/images/avatar.jpg" (optional)
+  avatar           : "images/avatar.jpeg"
   bio              : "Economics & Applied Mathematics student at IE University. Passionate about finance, quantitative analysis, and applying rigorous analytical methods to real-world problems."
   location         : "Madrid, Spain"
   employer         : "IE University"
