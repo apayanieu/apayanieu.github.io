@@ -17,7 +17,7 @@ tags:
 
 Polarization splits a population into camps that increasingly disagree — and stop talking. Classical opinion models show that local imitation can give either consensus or division, and adaptive-network models let agents rewrite away from disagreement, forming echo chambers.
 
-![Political polarization](/images/polarized-hero.png)
+![Political polarization](/images/polarized-hero.jpg)
 *Two camps, one society. Our model asks when a fixed social graph — with no rewiring at all — can still end up permanently divided by nothing more than the decay of trust across opinion lines.*
 
 **Our twist:** the wiring never changes. No tie is cut or created. Only its **strength** adapts, in a Hebbian style. We ask not *whether* polarization appears, but **when**, **how sharply**, and **how it depends on network structure**.
