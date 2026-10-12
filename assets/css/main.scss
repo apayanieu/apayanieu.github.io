@@ -1,23 +1,15 @@
 ---
 ---
 
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
-/* Custom Font Size Overrides */
+/* Custom overrides */
 html {
-  font-size: 14px; /* Default is usually 16px. 14px makes everything smaller. */
+  font-size: 14px;
 }
 
-h1 {
-  font-size: 1.5em; /* Reduces the size of the main page title */
-}
-
-h2 {
-  font-size: 1.3em; /* Reduces the size of section headers */
-}
-
-
-/* Increase profile picture size */
 .author__avatar img {
-  max-width: 250px; /* Adjust this value to your liking */
+  max-width: 200px;
+  border-radius: 50%;
 }
