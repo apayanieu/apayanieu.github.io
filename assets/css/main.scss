@@ -1,0 +1,17 @@
+---
+---
+
+@import "minimal-mistakes";
+
+/* Custom Font Size Overrides */
+html {
+  font-size: 14px; /* Default is usually 16px. 14px makes everything smaller. */
+}
+
+h1 {
+  font-size: 1.5em; /* Reduces the size of the main page title */
+}
+
+h2 {
+  font-size: 1.3em; /* Reduces the size of section headers */
+}
