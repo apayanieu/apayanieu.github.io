@@ -201,4 +201,5 @@ For a production pricing desk, this suggests a natural rule of thumb: when a pat
 
 ---
 
-Language (Python). GitHub repo: https://github.com/apayanieu/montecarlo_nm
+**Language:** Python  
+**GitHub repo:** [apayanieu/montecarlo_nm](https://github.com/apayanieu/montecarlo_nm)
