@@ -145,11 +145,17 @@ The Gray-Scott simulations use a $250 \times 250$ grid, $dx = 1$, $dt = 2$, and 
 |---|---|---|---|---|---|
 | **A** | 0.040 | 0.060 | 0.1556 | 0.1077 | Pattern saturates into spots |
 | **B** | 0.014 | 0.047 | 0.2634 | 0.0987 | Broad stripes, slow coarsening |
-| **C** | 0.062 | 0.065 | 0.0270 | 0.0161 | Patch decays; no sustained pattern |
+| **C** | 0.062 | 0.065 | 0.0270 | 0.0161 | Four-spot instability, later decays |
 | **D** | 0.078 | 0.061 | 0.0442 | 0.0274 | Patch decays; no sustained pattern |
 | **E** | 0.082 | 0.059 | 0.2073 | 0.1223 | Slower growth, complex structures |
 
 The variance trajectories show that types A, B, and E sustain pattern growth across the full $10{,}000$ time units, while types C and D stabilize quickly and never develop sustained structures — consistent with their location relative to the saddle-node bifurcation in the Gray-Scott parameter plane.
+
+The early-time morphology already separates the regimes. At $t = 200$ the activator patch has organized into qualitatively different shapes depending on $(F, k)$:
+
+![Gray-Scott Type A at t = 200: ring-shaped activator front.](/images/gray_scott_type_a_t200.png)
+
+*Type A ($F = 0.040$, $k = 0.060$) forms a single ring that will expand into the sustained spot pattern visible in the variance table.*
 
 ### Numerical stability
 
@@ -179,16 +185,8 @@ Three findings stand out.
 - **No adaptive mesh.** A uniform grid was used everywhere. For the 2D Gray-Scott runs at $N = 250$ this is acceptable, but finer resolution near pattern boundaries would improve accuracy.
 - **No quantitative comparison of the Gray-Scott types to the Pearson phase diagram.** The five types were chosen from the standard catalog but not checked against the published bifurcation boundaries.
 - **Bounded parameter sweep.** The Turing-space grid covered $a \in [0.01, 1.2]$ and $d \in [0, 120]$. Parameter regions outside this range, or different $b$, could produce additional structure.
-
-## References
-
-1. Gierer, A., & Meinhardt, H. (1972). A theory of biological pattern formation. *Kybernetik*, **12**(1), 30–39.
-2. Pearson, J. E. (1993). Complex patterns in a simple system. *Science*, **261**(5118), 189–192.
-3. Turing, A. M. (1952). The chemical basis of morphogenesis. *Philosophical Transactions of the Royal Society B*, **237**(641), 37–72.
-4. Murray, J. D. (2003). *Mathematical Biology II: Spatial Models and Biomedical Applications* (3rd ed.). Springer.
-
 ---
 
 The complete notebook, including all helper functions, parameter sweeps, and animation generation, is available on GitHub: **[Reaction-Diffusion Project →](https://github.com/apayanieu/reaction_difussion)**
 
-This project was developed as part of the Mathematical Modeling course at IE University (2nd Assignment), April 2026.
+This project was developed as part of the Mathematical Modeling course at IE University (2nd Assignment).
