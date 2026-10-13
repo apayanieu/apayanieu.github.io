@@ -27,7 +27,7 @@ This project builds a discrete-time simulator for a single false claim on a coev
 
 The core methodological contribution is the **SIR+E extension**: a modified SIR model with an absorbing **entrenched** state $E$ that remains infectious indefinitely. This is not "SIR but slower." It is a stronger behavioral claim: some fraction of exposed users become effectively irreversible spreaders, even after others have been corrected.
 
-![Network misinformation diffusion hero](/images/sire_hero.png)
+![Network misinformation diffusion hero](/images/sire_hero.jpg)
 
 ---
 
