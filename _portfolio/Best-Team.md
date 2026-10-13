@@ -56,11 +56,11 @@ The individual sub-scores are:
 
 $$
 \begin{aligned}
-S_{\text{pass}} &= 0.0020 \cdot \text{passes} + 0.030 \cdot \text{key\_passes} + 0.025 \cdot \text{accuracy}, \\[2pt]
-S_{\text{shoot}} &= 0.0025 \cdot \text{shots} + 0.035 \cdot \text{shots\_on} + 0.40 \cdot \text{goals}, \\[2pt]
-S_{\text{creativity}} &= 0.40 \cdot \text{assists} + 0.0030 \cdot \text{dribbles} + 0.010 \cdot \text{fouls\_drawn}, \\[2pt]
-S_{\text{defense}} &= 0.0040 \cdot \text{tackles} + 0.0030 \cdot \text{interceptions} + 0.0030 \cdot \text{duels\_won}, \\[2pt]
-S_{\text{discipline}} &= -0.015 \cdot \text{fouls\_committed} - 0.10 \cdot \text{cards}.
+S_{\text{pass}} &= 0.0020 \cdot \text{passes} + 0.030 \cdot \text{key passes} + 0.025 \cdot \text{accuracy}, \\[2pt]
+S_{\text{shoot}} &= 0.0025 \cdot \text{shots} + 0.035 \cdot \text{shots on target} + 0.40 \cdot \text{goals}, \\[2pt]
+S_{\text{creativity}} &= 0.40 \cdot \text{assists} + 0.0030 \cdot \text{dribbles} + 0.010 \cdot \text{fouls drawn}, \\[2pt]
+S_{\text{defense}} &= 0.0040 \cdot \text{tackles} + 0.0030 \cdot \text{interceptions} + 0.0030 \cdot \text{duels won}, \\[2pt]
+S_{\text{discipline}} &= -0.015 \cdot \text{fouls committed} - 0.10 \cdot \text{cards}.
 \end{aligned}
 $$
 
