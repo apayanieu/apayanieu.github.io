@@ -113,11 +113,11 @@ The 1D simulations confirm this. Starting from small noise about $(u^*, v^*)$ an
 - **Case A**: the $u$-RMS amplitude grows from $1.15 \times 10^{-2}$ to $3.77 \times 10^{-2}$, a factor of $3.29$. The amplitude of the predicted mode $n = 5$ grows by a factor of $19.24$. Fitting the late-time profile to $\cos(5\pi x/L)$ gives a relative fit of **0.967** — the simulation is dominated by the analytically predicted mode.
 - **Case B**: the $u$-RMS amplitude collapses to $1.02 \times 10^{-7}$ and the mode-$5$ amplitude to $2.41 \times 10^{-8}$, confirming decay to the homogeneous state.
 
-![Case A: 1D Gierer-Meinhardt pattern formation, mode 5 emerging from noise.](/images/gm_1d_case_a.gif)
+![Case A: 1D Gierer-Meinhardt pattern formation, mode 5 emerging from noise.](/images/gm1d_case_a.gif)
 
 *Case A: the leading unstable mode $n = 5$ emerges from noise and saturates into a stable periodic pattern.*
 
-![Case B: 1D Gierer-Meinhardt decay to the homogeneous equilibrium.](/images/gm_1d_case_b.gif)
+![Case B: 1D Gierer-Meinhardt decay to the homogeneous equilibrium.](/images/gm1d_case_b.gif)
 
 *Case B: no admissible mode is unstable, and the perturbation decays to zero.*
 
@@ -153,7 +153,7 @@ The variance trajectories show that types A, B, and E sustain pattern growth acr
 
 The early-time morphology already separates the regimes. At $t = 200$ the activator patch has organized into qualitatively different shapes depending on $(F, k)$:
 
-![Gray-Scott Type A at t = 200: ring-shaped activator front.](/images/gray_scott_type_a_t200.png)
+![Gray-Scott Type A at t = 200: ring-shaped activator front.](/images/gray_scott_type_a_t200.gif)
 
 *Type A ($F = 0.040$, $k = 0.060$) forms a single ring that will expand into the sustained spot pattern visible in the variance table.*
 
