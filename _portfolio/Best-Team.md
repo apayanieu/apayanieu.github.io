@@ -4,6 +4,7 @@ excerpt: "A statistics-driven pipeline that pulls player data from the API-Footb
 collection: portfolio
 tags:
   - Sports Analytics
+  - Software Engineering
   - Data Engineering
   - Machine Learning
   - Python
@@ -13,11 +14,40 @@ use_math: true
 
 ## Overview
 
-National team selection is traditionally a matter of expert judgement: scouts, coaches, and pundits weigh form, tactical fit, and intangibles that resist quantification. This project asks a narrower but more tractable question: **given a large pool of players and a well-defined set of per-90 statistics, what starting eleven maximizes an aggregate performance score under positional constraints?**
+This project was the final assignment for **Computer Programming 2** (May 2025). Its primary purpose was to build a complete, well-structured software project from scratch while getting hands-on experience with **GitHub workflows** — branching, commit discipline, pull requests, `.gitignore`, and repository hygiene — alongside other **standard software engineering practices**: modular package structure, unit testing, dependency pinning, environment configuration, and documentation.
 
-The pipeline has three stages. First, a data-collection layer queries the [API-Football](https://www.api-football.com/) service for every player in Europe's top five leagues plus a curated set of additional clubs, caching every response locally so that repeated runs are free. Second, a rating model converts each player's raw statistics into a position-specific score that weights the metrics that matter most for that role — shooting for attackers, interceptions and duels for defenders, key passes and accuracy for midfielders. Third, a selection routine filters by nationality, sorts by rating within each position, and assembles a balanced squad.
+The application itself addresses a concrete analytical question: given a large pool of players and a well-defined set of per-90 statistics, **what starting eleven maximizes an aggregate performance score under positional constraints?**
 
-As a natural follow-up, the same match-level data is used to train a Random Forest classifier that predicts match outcomes from team statistics. The feature-importance ranking gives an empirical answer to a question the position weights only assumed: **which on-pitch statistics actually correlate with winning?**
+National team selection is traditionally a matter of expert judgement — scouts, coaches, and pundits weigh form, tactical fit, and intangibles that resist quantification. This project proposes a narrower, more tractable alternative: a rating model that converts each player's raw statistics into a position-specific score, and a selection routine that assembles a balanced squad from the top-ranked candidates.
+
+The pipeline has three stages. First, a data-collection layer queries the [API-Football](https://www.api-football.com/) service for every player in Europe's top five leagues plus a curated set of additional clubs, caching every response locally so that repeated runs are free. Second, a rating model converts each player's statistics into a position-specific score that weights the metrics that matter most for that role — shooting for attackers, interceptions and duels for defenders, key passes and accuracy for midfielders. Third, a selection routine filters by nationality, sorts by rating within each position, and assembles a balanced squad.
+
+As a follow-up analysis on the same data source, a Random Forest classifier is trained on Spain's match statistics to identify which in-game features actually predict winning.
+
+## Project structure
+
+The repository follows a standard Python package layout:
+Best_Team-main/
+├── Readme.md
+├── environment 2.yml # pinned conda environment
+├── setup.py # package metadata and installation
+├── src/
+│ ├── init.py
+│ └── mypackage/
+│ ├── init.py
+│ ├── get_player_stats.py # player-stat API client + cache
+│ ├── get_players_ids.py # team roster enumeration
+│ ├── get_team_stats.py # match-level API client + cache
+│ ├── get_top_players.py # squad selection logic
+│ ├── main.py # top-level entry point
+│ ├── player_init.py # Player class hierarchy + rating model
+│ └── winning_parameters.py # Random Forest match-outcome analysis
+└── tests/
+├── test_data_collection.py
+└── test_top_players/
+
+
+The `src/mypackage/` split separates concerns: three modules handle API access and caching, one defines the domain model (`Player` and its position subclasses), one implements selection, and one runs the machine-learning analysis. The `tests/` directory contains unit tests covering the data-collection layer and the selection logic, exercised via `pytest`.
 
 ## Data
 
@@ -38,7 +68,7 @@ For the match-level study, the analysis focuses on **Spain's national team** acr
 
 ### Caching
 
-Every API response is hashed by endpoint and query parameters, then written to a local `api_cache/` directory. Repeated calls for the same data hit the cache instead of the network. This is not just a performance optimization — it makes the pipeline reproducible offline and keeps the free-tier quota from being consumed by development iterations.
+Every API response is hashed by endpoint and query parameters, then written to a local `api_cache/` directory. Repeated calls for the same data hit the cache instead of the network. This is not just a performance optimization — it makes the pipeline reproducible offline and keeps the free-tier quota from being consumed by development iterations. The cache layer is exercised directly in `tests/test_data_collection.py`.
 
 ## Methodology
 
@@ -70,7 +100,7 @@ The weight structure is **explicitly adversarial in the disciplinary dimension**
 
 | Position | $w_p$ | $w_s$ | $w_c$ | $w_d$ | $w_\phi$ | Rationale |
 |---|---|---|---|---|---|---|
-| **Goalkeeper** | — | 0.035 | 0.50 | $-0.02$ (conceded) | — | Custom formula; save volume + penalty saves − goals conceded + pass accuracy |
+| **Goalkeeper** | — | 0.035 | 0.50 | $-0.02$ (conceded) | — | Custom formula: save volume + penalty saves − goals conceded + pass accuracy |
 | **Defender** | 1.3 | 1.0 | 1.0 | **1.5** | 1.0 | Defensive work is primary; passing accuracy matters for build-up |
 | **Midfielder** | **1.8** | 1.0 | **1.5** | 1.0 | 1.0 | Passing and creativity dominate; defends less than a centre-back |
 | **Attacker** | 1.2 | **1.5** | **1.3** | 1.0 | 1.0 | Shooting weighted highest; creativity rewarded for assisting |
@@ -89,7 +119,7 @@ $$
 (k_{\text{GK}}, k_{\text{DEF}}, k_{\text{MID}}, k_{\text{ATT}}) = (3, 8, 6, 6).
 $$
 
-The resulting 23-player squad is the input to any starting-eleven format the user prefers — a 4-3-3, a 4-2-3-1, or any other shape.
+The resulting 23-player squad is the input to any starting-eleven format the user prefers — a 4-3-3, a 4-2-3-1, or any other shape. The selection routine is covered by `tests/test_top_players/`.
 
 ### Match-outcome model
 
@@ -106,13 +136,13 @@ Feature importances are read off the fitted forest and ranked.
 
 ### The selected eleven
 
-Applying the pipeline to the Spanish player pool for the 2023–24 season produces a squad whose starting eleven is visualised below, in a **4-3-3** shape.
+Applying the pipeline to the Spanish player pool for the 2023–24 season produces a squad whose starting eleven is shown below.
 
-![The selected Spanish starting XI, visualised in a 4-3-3 formation.](/images/best_team_xi.png)
+![The selected Spanish starting XI, illustrated in a 4-3-3 formation.](/images/best_team_xi.png)
 
-*The optimised starting eleven. Each player card shows the position-specific rating computed by the pipeline, along with the underlying attribute scores. The lineup balances attacking output (Aspas, Moreno, Williams) with creative distribution (Rodri, Baena, Kirian) and defensive solidity (Pau Torres, Marsà, Grimaldo, Porro).*
+*A visual reference for how the selected eleven would line up in a 4-3-3. The card art and ratings are for illustration only — the pipeline's actual selection logic is described in the text below.*
 
-The selection is interesting for what it reveals about the rating model. **Rodri's midfield score of 89** places him well clear of the next-best central midfielder, driven primarily by the passing and creative multipliers ($w_p = 1.8$, $w_c = 1.5$). **Grimaldo's defender score of 84** reflects his unusually high attacking contribution for a full-back — the defensive multiplier dominates, but his passing and creativity sub-scores still push the total higher than a traditional centre-back's. Up front, **Iago Aspas at 85** and **Gerard Moreno at 83** are the highest-rated attackers, both heavily weighted by goals and shots on target.
+The selection is interesting for what it reveals about the rating model. **Rodri** sits clear of the next-best central midfielder, driven primarily by the passing and creative multipliers ($w_p = 1.8$, $w_c = 1.5$). **Grimaldo** ranks unusually high for a full-back because his passing and creativity sub-scores push his total above what a traditional centre-back accumulates. Up front, **Iago Aspas** and **Gerard Moreno** top the attacker rankings, both heavily weighted by goals and shots on target.
 
 ### What the model got right
 
@@ -136,14 +166,27 @@ Three observations are worth highlighting.
 
 **Third, the match-outcome model partially validates the rating model's feature selection.** The features that drive the RF's importance ranking (shots on target, pass accuracy, expected goals) are exactly the ones the rating model already emphasises through its passing and shooting sub-scores. The RF analysis is not independent confirmation — both use the same underlying data — but it is a consistency check that the intuitive weights were not arbitrary.
 
+## Software engineering practices
+
+Beyond the analytical output, this project was an exercise in applying standard software engineering practices end-to-end:
+
+- **Version control discipline.** Development was carried out in a Git repository hosted on GitHub, with feature branches, descriptive commit messages, and a clean `main` branch.
+- **Reproducible environment.** Dependencies are pinned in `environment 2.yml` so that the analysis can be re-run byte-for-byte on a fresh machine.
+- **Packaging.** The pipeline is installed as a proper Python package via `setup.py`, with the source code under `src/mypackage/` and importable as `mypackage.*`.
+- **Unit testing.** The data-collection layer and the top-player selection routine are covered by tests in `tests/`, runnable with `pytest`.
+- **Separation of concerns.** API access, caching, domain modelling, selection, and analysis live in distinct modules, so that a change to the rating weights does not require touching the caching layer, and vice versa.
+- **Documentation.** A top-level `Readme.md` explains setup and usage; module docstrings document the public API.
+
 ## Limitations
 
 - **No positional availability constraints.** The pipeline selects the top $k$ players per position without regard to whether a chosen eleven is formable in a real 4-3-3 or 4-2-3-1. A dedicated optimisation step (e.g. an integer program with formation constraints) would remove the manual adjustment currently required.
 - **No opponent modelling.** The ratings are computed against the player's full-season record, not against the specific opponents they would face in a match. A matchup-aware model would weight, for instance, defensive statistics differently against a possession-heavy side than against a low block.
 - **No fatigue or availability information.** The API provides season aggregates; it does not expose injuries, international retirements, or minutes-managed rest periods. The Aspas selection is the clearest example of where this gap shows up in practice.
 - **Small sample for the match-outcome model.** Spain's fixture list across two seasons is on the order of a few dozen matches. The Random Forest's importances are directionally reliable but the confidence intervals around them are wide, and no cross-validation was performed across multiple seasons.
-- **Rating weights were tuned by inspection.** The BASE_WEIGHTS and position multipliers were set by iterating on the output and adjusting until the top-ranked players matched expectation. A more principled approach would fit the weights to a labelled target such as transfer value or manager-selection probability.
-
+- **Rating weights were tuned by inspection.** The `BASE_WEIGHTS` and position multipliers were set by iterating on the output and adjusting until the top-ranked players matched expectation. A more principled approach would fit the weights to a labelled target such as transfer value or manager-selection probability.
+- 
 ---
 
 The complete codebase — data collection, rating model, selection routine, and the match-outcome analysis — is available on GitHub: **[Best Team Project →](https://github.com/apayanieu/Best_Team)**
+
+This project was developed as the final assignment for Computer Programming 2 at IE University, May 2025.
