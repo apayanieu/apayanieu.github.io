@@ -27,24 +27,8 @@ As a follow-up analysis on the same data source, a Random Forest classifier is t
 ## Project structure
 
 The repository follows a standard Python package layout:
-Best_Team-main/
-├── Readme.md
-├── environment 2.yml # pinned conda environment
-├── setup.py # package metadata and installation
-├── src/
-│ ├── init.py
-│ └── mypackage/
-│ ├── init.py
-│ ├── get_player_stats.py # player-stat API client + cache
-│ ├── get_players_ids.py # team roster enumeration
-│ ├── get_team_stats.py # match-level API client + cache
-│ ├── get_top_players.py # squad selection logic
-│ ├── main.py # top-level entry point
-│ ├── player_init.py # Player class hierarchy + rating model
-│ └── winning_parameters.py # Random Forest match-outcome analysis
-└── tests/
-├── test_data_collection.py
-└── test_top_players/
+
+![Project Structure.](/images/project_structure.png)
 
 
 The `src/mypackage/` split separates concerns: three modules handle API access and caching, one defines the domain model (`Player` and its position subclasses), one implements selection, and one runs the machine-learning analysis. The `tests/` directory contains unit tests covering the data-collection layer and the selection logic, exercised via `pytest`.
